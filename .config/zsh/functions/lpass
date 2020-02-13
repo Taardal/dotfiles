@@ -1,0 +1,11 @@
+#!/usr/local/bin/zsh
+
+# Run lastpass commands in Docker
+
+function lpass() {
+
+docker run --rm -ti \
+  -v ${HOME}/.config/lastpass:/root/.lpass/ \
+  taardal/lastpass-cli:latest lpass $argv
+
+}

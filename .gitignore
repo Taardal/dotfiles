@@ -1,0 +1,8 @@
+# ingored file endings
+
+# ignored directories
+.vscode/
+.idea/
+
+# ignored files
+.DS_Store

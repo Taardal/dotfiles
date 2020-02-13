@@ -1,0 +1,118 @@
+#
+# Git
+#
+
+alias gi='git init'
+alias gs='git status'
+alias gb='git branch'
+alias gc='git commit -v'
+alias gcl='git clone --recurse-submodules'
+
+alias gco='git checkout'
+alias gcb='git checkout -b'
+
+alias gr='git remote'
+alias grv='git remote -v'
+alias gra='git remote add'
+alias grmv='git remote rename'
+alias grrm='git remote remove'
+alias grs='git restore'
+alias grset='git remote set-url'
+
+alias gp='git push origin $(git_current_branch)'
+alias gpf='git push --force origin $(git_current_branch)'
+alias gpu='git push --set-upstream origin $(git_current_branch)'
+
+# Add and commit all changed files
+gcam() {
+  git add .;
+  git commit -am $1;
+}
+
+# Search for files checked into git (list all by "gfg .")
+alias gfg='git ls-files | grep'
+
+# Pretty log
+alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+# Push branch with origin as upstream remote
+alias gpsup='git push --set-upstream origin $(git symbolic-ref --quiet --short HEAD)'
+
+# Update all submodules
+alias gsupdate='git submodule foreach git pull -f origin master'
+
+# Get name of currently active branch
+git_current_branch() {
+  git symbolic-ref --quiet --short HEAD
+}
+
+# Rebase in interactive mode
+grb() {
+  git rebase -i HEAD~$1
+}
+
+# Rebase master into current branch
+grbm() {
+  git checkout master; 
+  git pull origin master; 
+  git checkout $(git_current_branch); 
+  git rebase master;
+}
+
+# Rebase develop into current branch
+grbd() {
+  git checkout develop; 
+  git pull origin develop; 
+  git checkout $(git_current_branch); 
+  git rebase develop;
+}
+
+# Commit all changes and rebase it into previous commit
+gfix() {
+  git commit -am 'fix'; 
+  git rebase -i HEAD~2;
+}
+
+# Mark all conflicts as solved and continue rebasing
+grbc() {
+  git add .; 
+  git rebase --continue;
+}
+
+# Prune branches with no remote and try to delete them
+glean() {
+  git fetch --prune;
+  git branch -r | awk "{print \$1}" | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk "{print \$1}" | xargs git branch -d;
+}
+
+
+# 
+# Git Flow
+#
+
+alias gfi='git flow init'
+alias gffs='git flow feature start'
+alias gffc='git flow feature checkout'
+alias gffp='git flow feature publish'
+alias gfff='git flow feature finish'
+alias gfhs='git flow hotfix start'
+alias gfhc='git flow hotfix checkout'
+
+
+#
+# GitHub
+#
+
+# Open current repo in Github webpage
+gh() { 
+  open $(git config remote.origin.url | sed "s/git@\(.*\):\(.*\).git/https:\/\/\1\/\2/")/$1$2
+}
+
+# Open current branch
+alias ghb='gh tree/$(git symbolic-ref --quiet --short HEAD)'
+
+# Open current directory/file in current branch
+alias ghbf='gh tree/$(git symbolic-ref --quiet --short HEAD )/$(git rev-parse --show-prefix)' 
+
+# Open current directory/file in master branch
+alias ghf='gh tree/master/$(git rev-parse --show-prefix)'

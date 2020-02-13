@@ -1,0 +1,11 @@
+#!/usr/local/bin/zsh
+
+# Run yaml-link in dir using docker
+
+function yaml-lint() {
+
+docker run -it --rm \
+  -v $(pwd):$(pwd) \
+  -w /$(pwd) \
+  sdesbure/yamllint:latest yamllint .
+}
