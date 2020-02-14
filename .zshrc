@@ -28,4 +28,5 @@ plugins=(z brew git-flow osx extract docker vscode golang common-aliases you-sho
 
 # Source alias files
 source ${HOME}/.config/zsh/aliases/git
+source ${HOME}/.config/zsh/aliases/spotify
 source $ZSH/oh-my-zsh.sh

@@ -1,0 +1,7 @@
+# Searching
+alias ssa="spotify play artist"
+alias ssp="spotify play list"
+alias sss="spotify play song"
+
+# Pre-progammed playlists
+alias bossfight="spotify play list 'boss fight music'"

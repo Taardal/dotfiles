@@ -4,12 +4,20 @@
 
 alias gi='git init'
 alias gs='git status'
+alias gl='git pull'
 alias gb='git branch'
 alias gc='git commit -v'
 alias gcl='git clone --recurse-submodules'
 
 alias gco='git checkout'
 alias gcb='git checkout -b'
+
+alias gf='git fetch'
+alias gl='git pull origin $(git_current_branch)'
+
+alias gp='git push origin $(git_current_branch)'
+alias gpf='git push --force origin $(git_current_branch)'
+alias gpu='git push --set-upstream origin $(git_current_branch)'
 
 alias gr='git remote'
 alias grv='git remote -v'
@@ -19,9 +27,14 @@ alias grrm='git remote remove'
 alias grs='git restore'
 alias grset='git remote set-url'
 
-alias gp='git push origin $(git_current_branch)'
-alias gpf='git push --force origin $(git_current_branch)'
-alias gpu='git push --set-upstream origin $(git_current_branch)'
+alias gsta='git stash push'
+alias gsta='git stash save'
+alias gstaa='git stash apply'
+alias gstc='git stash clear'
+alias gstd='git stash drop'
+alias gstl='git stash list'
+alias gstp='git stash pop'
+alias gsts='git stash show --text'
 
 # Add and commit all changed files
 gcam() {
@@ -44,6 +57,12 @@ alias gsupdate='git submodule foreach git pull -f origin master'
 # Get name of currently active branch
 git_current_branch() {
   git symbolic-ref --quiet --short HEAD
+}
+
+# Checkout and pull master
+gpom() {
+  git checkout master;
+  git pull origin master;
 }
 
 # Rebase in interactive mode
