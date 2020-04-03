@@ -1,18 +1,24 @@
-#
-# Git
-#
+#################
+## Git aliases ##
+#################
+
 
 alias gi='git init'
 alias gs='git status'
 alias gl='git pull'
 alias gb='git branch'
 alias gc='git commit -v'
+alias gm='git merge'
 alias gcl='git clone --recurse-submodules'
 
+alias gd='git diff'
+alias gds='git diff --staged'
+
 alias gco='git checkout'
-alias gcb='git checkout -b'
+alias gcb='git checkout -b' 
 
 alias gf='git fetch'
+alias gfo='git fetch origin'
 alias gl='git pull origin $(git_current_branch)'
 
 alias gp='git push origin $(git_current_branch)'
@@ -36,12 +42,6 @@ alias gstl='git stash list'
 alias gstp='git stash pop'
 alias gsts='git stash show --text'
 
-# Add and commit all changed files
-gcam() {
-  git add .;
-  git commit -am $1;
-}
-
 # Search for files checked into git (list all by "gfg .")
 alias gfg='git ls-files | grep'
 
@@ -59,6 +59,19 @@ git_current_branch() {
   git symbolic-ref --quiet --short HEAD
 }
 
+# Checkout and pull remote branch
+gcor() {
+  git fetch;
+  git checkout $1;
+  git pull origin;
+}
+
+# Add and commit all changed files
+gcam() {
+  git add .;
+  git commit -am $1;
+}
+
 # Checkout and pull master
 gpom() {
   git checkout master;
@@ -72,17 +85,19 @@ grb() {
 
 # Rebase master into current branch
 grbm() {
+  currentBranch=$(git_current_branch);
   git checkout master; 
   git pull origin master; 
-  git checkout $(git_current_branch); 
+  git checkout $currentBranch; 
   git rebase master;
 }
 
 # Rebase develop into current branch
 grbd() {
+  currentBranch=$(git_current_branch);
   git checkout develop; 
   git pull origin develop; 
-  git checkout $(git_current_branch); 
+  git checkout $currentBranch 
   git rebase develop;
 }
 
@@ -99,15 +114,29 @@ grbc() {
 }
 
 # Prune branches with no remote and try to delete them
-glean() {
+gclean() {
   git fetch --prune;
-  git branch -r | awk "{print \$1}" | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk "{print \$1}" | xargs git branch -d;
+  git branch -r | awk "{print \$1}" | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk "{print \$1}" | xargs git branch -D;
 }
 
+# Merge with updated master
+gmm() {
+  currentBranch=$(git_current_branch);
+  git checkout master;
+  git pull origin master;
+  git checkout $currentBranch;
+  git merge master;
+}
 
-# 
-# Git Flow
-#
+# Add all files and commit to finish merge
+gmf() {
+  git add .;
+  git commit;
+}
+
+######################
+## Git Flow aliases ##
+######################
 
 alias gfi='git flow init'
 alias gffs='git flow feature start'
@@ -118,9 +147,9 @@ alias gfhs='git flow hotfix start'
 alias gfhc='git flow hotfix checkout'
 
 
-#
-# GitHub
-#
+####################
+## GitHub aliases ##
+####################
 
 # Open current repo in Github webpage
 gh() { 

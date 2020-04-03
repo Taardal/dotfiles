@@ -1,7 +1,16 @@
+#################
+## Spotify CLI ##
+#################
+
 # Searching
 alias ssa="spotify play artist"
 alias ssp="spotify play list"
 alias sss="spotify play song"
 
-# Pre-progammed playlists
+# Sharing is caring
+alias sshare="spotify share uri | awk '{print $3}' | pbcopy"
+alias splay="spotify play uri $(pbpaste)"
+
+# Pre-progmmed playlists
 alias bossfight="spotify play list 'boss fight music'"
+alias hackermode="spotify play 'Fuck me Im Famous'"
