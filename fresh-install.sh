@@ -12,8 +12,14 @@ if [ "$RESP" == "y" ]; then
   echo "brew: installing homebrew..."
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+  echo "brew: tapping cask-fonts..."
+  brew tap homebrew/cask-fonts
+
   echo "brew: installing font -> fira code..."
   brew install cask font-fira-code
+
+  echo "brew: installing font -> jetbrains mono..."
+  brew install cask font-jetbrains-mono
 
   echo "brew: installing github cli..."
   brew install github/gh/gh
