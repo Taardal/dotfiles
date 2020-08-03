@@ -15,7 +15,7 @@ export EDITOR=vim
 
 # Path to your zsh functions
 fpath=(~/.config/zsh/functions $fpath)
-autoload -Uz gcloud gcurl gsutil lpass printcolors yaml-lint
+autoload -Uz gcloud gcurl gsutil lpass printcolors yaml-lint 
 
 # Folder for custom files
 #ZSH_CUSTOM=$HOME/.oh-my-custom/
@@ -31,4 +31,4 @@ source ${HOME}/.config/zsh/aliases/git
 source ${HOME}/.config/zsh/aliases/spotify
 source ${HOME}/.config/zsh/aliases/casual
 source $ZSH/oh-my-zsh.sh
-source ${HOME}/.bulder
+

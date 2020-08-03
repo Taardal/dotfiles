@@ -1,7 +1,7 @@
 #!/bin/sh
 echo ""
 echo "  (\.   \      ,/) "
-echo "   \(   |\     )/    Hear Ye, hear Ye! There be magic ahead!"
+echo "   \(   |\     )/    Hear Ye, hear ye! There be magic ahead!"
 echo "   //\  | \   /\\ "
 echo "  (/ /\_#oo#_/\ \)   This script downloads zsh and tmux, and configure it according to my"
 echo "   \/\  ####  /\/    preferences. This script will replace existing configurations!"
@@ -14,6 +14,9 @@ if [ "$RESP" == "y" ]; then
 
   echo "brew: installing font -> fira code..."
   brew install cask font-fira-code
+
+  echo "brew: installing github cli..."
+  brew install github/gh/gh
 
   echo "brew: installing zsh..."
   brew install zsh
@@ -78,5 +81,5 @@ if [ "$RESP" == "y" ]; then
   echo "You can now set /usr/local/bin/zsh as your default terminal shell"
 else
   echo ""
-  echo "Script failed successfully!"
+  echo "Hear ye, hear ye! There be explosions behind!"
 fi
