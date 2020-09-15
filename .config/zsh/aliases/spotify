@@ -14,3 +14,4 @@ alias splay="spotify play uri $(pbpaste)"
 # Pre-progmmed playlists
 alias bossfight="spotify play list 'boss fight music'"
 alias hackermode="spotify play 'Fuck me Im Famous'"
+alias powercoding="spotify play uri spotify:playlist:41Cd3KyEshyN1JduIfSJsc"
